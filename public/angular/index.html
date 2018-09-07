@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="angular/angular.js"></script>
+		<script type="text/javascript">
+			angular.module('myapp',[])
+			.controller('httpCtrl',function($scope,$http){
+				$http({
+					url:"http://localhost:9999/custom/list",
+					method: 'GET'
+				})
+				.success(function(e){
+					console.log(e)
+					$scope.product = e
+				})
+				.error(function(){
+					alert('数据出错')
+				})
+				$scope.a = true 
+				$scope.fn = function(a){
+					if ($scope.a) {
+						$scope.a = false
+					} else{
+						$scope.a = true
+					}
+					
+				}
+			})
+			
+		</script>	
+	</head>
+	<body>
+		<div ng-controller="httpCtrl">
+			<button ng-click="fn()">排序</button>
+			<nav>
+				<a>姓名</a>
+				<a>年龄</a>
+				<a>性别</a>
+				<a>籍贯</a>
+				<a>工作</a>
+				<a id="press">收入</a>
+			</nav>
+		<ul class="main" style="margin-left: -40px;">
+			<li style="list-style: none;" ng-repeat="products in product | orderBy:'press':a">
+				<span>{{products.date}}</span>
+				<span>{{products.exp}}</span>
+				<span>{{products.name}}</span>
+				<span>{{products.pic}}</span>
+				<span>{{products.place}}</span>
+				<span>{{products.press}}</span>
+			</li>
+			
+		</ul>
+		
+		</div>
+	</body>
+	
+</html>

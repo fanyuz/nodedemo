@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="package/jquery/jquery-2.1.0.js"></script>
+		<script src="package/laypage.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/list.css"/>
+		
+	</head>
+	<body>
+		<header>
+			<div class="logo">
+				<img src="img/logo.png"/>
+			</div>
+		</header>
+		<nav>
+			<a href="list.html"><img src="img/nav1.png"/></a>
+			<a><img src="img/nav3.png"/></a>
+			<a><img src="img/nav4.png"/></a>
+			<a><img src="img/nav5.png"/></a>
+			<a><img src="img/nav6.png"/></a>
+			<a href="addition.html"><img src="img/nav7.png"/></a>
+			<a href="chart.html"><img src="img/nav8.png"/></a>
+			<a href="detail.html"><img src="img/nav9.png"/></a>
+			<a><img src="img/nav10.png"/></a>
+		</nav>
+		<div class="main">
+			<div class="increase">
+				<input type="text" id="findText" />
+				<button type="button" id="find">查找</button>
+				<button type="button" id="add">新增</button>
+			</div>
+			
+			<ul id="main_list">
+				<li class="li_header">
+					<span>用户ID</span>
+					<span>名字</span>
+					<span>电话</span>
+					<span>公司</span>
+					<span>级别</span>
+					<span></span>
+				</li>
+				<ul id="list">
+					
+				</ul>
+			</ul>
+			<div id="pagecount">
+				<!--<span id="lastpage">
+					上一页
+				</span>
+				<div id="pages">
+					<i>1</i>
+					<i>2</i>
+					<i>3</i>
+					<i>4</i>
+				</div>
+				
+				<span id="nextpage">
+					下一页
+				</span>-->
+				<ul id="biuuu_city_list"></ul>
+
+				<div id="biuuu_city"></div>
+			</div>
+			
+		</div>
+		<footer>
+			<p>源自北美的技术，最优秀的师资，最真实的企业环境，最实用的实战项目</p>
+			<p>版权所有@加拿大达内IT培训集团公司</p>
+		</footer>
+	</body>
+	<script type="text/javascript">
+//		$.ajax({
+//			type:"get",
+//			url:"localhost:8888/item/list",
+//			async:true,
+//			success:function(){
+//				alert(123)
+//			},
+//			error:function(){
+//				alert('失败')
+//			}
+//		});
+//		$('#add').click(function(){
+//			window.location.href = 'addition.html'
+//		})
+//		var curPage = 1; //当前页码
+//  	var total,pageSize,totalPage;
+//	
+//      	getData(1)
+//   
+//
+//		function fn(page){
+//          if(page){
+//              getData(page);
+//          }
+//      }
+//		function getData(page){
+//			$.ajax({
+//				type:'get',
+//				url:"http://localhost:8888/item/page",
+//				async:true,
+//				data: {'pageNum':page},
+//				success:function(data){
+//					total = data.total; //总记录数
+//                  pageSize = data.pageSize; //每页显示条数
+//                  curPage = page; //当前页
+//                  totalPage = data.totalPage; //总页数
+//                  list.innerHTML='';
+//                  var data=data.list
+//					for (var i=0;i<data.length;i++) {
+//	//							console.log(data[i].id)
+//						var arrli = document.createElement('li');
+//						arrli.innerHTML='<span>'+data[i].id+'</span>'+
+//										'<span>'+data[i].uname+'</span>'+
+//										'<span>'+data[i].tel+'</span>'+
+//										'<span>'+data[i].company+'</span>'+
+//										'<span>'+data[i].jibie+'</span>'+
+//										'<button class="detail" del="'+data[i].id+'">详情</button>'+
+//										'<button class="dell" del="'+data[i].id+'">删除</button>';
+//						arrli.className = 'arrli';
+//						list.appendChild(arrli);
+//					};
+//					//删除
+//					$('.dell').click(function(){
+//						var id = $(this).attr('del');
+//						var _this = $(this)
+//						$.ajax({
+//							type:'get',
+//							url:"http://localhost:8888/item/del",
+//							async:true,
+//							data:{
+//								id:id
+//							},
+//							success:function(data){
+//								
+//								if (data.flag == 1) {
+//									alert('删除成功')
+//									//window.location.reload()//刷新页面
+//									_this.parent().remove();
+//									
+//								} else{
+//									alert("删除失败")
+//								}
+//								
+//							},
+//							error:function(){
+//								
+//							}
+//						});
+//							
+//						
+//	//							alert($(this).attr('del'))
+//					});
+//					//详情
+//					$('.detail').click(function(){
+//						var id = $(this).attr('del');
+//						localStorage.id = id;
+//						window.location.href = 'detail.html'
+//							
+//						
+//	//							alert($(this).attr('del'))
+//					});
+//					
+//				},
+//				error:function(){
+//					
+//				},
+//				complete: function() {
+//					getPageBar();
+//					
+//				}
+//			});
+//		}
+//			
+//			
+//		function getPageBar(){
+//          //页码大于最大页数
+//          if(curPage>totalPage) curPage=totalPage;
+//          //页码小于1
+//          if(curPage<1) curPage=1;
+//          pageStr = "<span>共"+total+"条</span><span>"+curPage+"/"+totalPage+"</span>";
+//
+//          //如果是第一页
+//          if(curPage==1){
+//              pageStr += "<span>首页</span><span>上一页</span>";
+//          }else{
+//              pageStr += "<span><a href='javascript:void(0)' onclick='fn(1)'>首页</a></span><span><a href='javascript:void(0)' onclick='fn("+(curPage-1)+")'>上一页</a></span>";
+//          }
+//			
+//          //如果是最后页
+//          if(curPage>=totalPage){
+//              pageStr += "<span>下一页</span><span>尾页</span>";
+//          }else{
+//              pageStr += "<span><a href='javascript:void(0)' onclick='fn("+(parseInt(curPage)+1)+")'>下一页</a></span><span><a href='javascript:void(0)' onclick='fn("+totalPage+")'>尾页</a></span>";
+//          }
+//
+//          $("#pagecount").html(pageStr);
+//      }
+//				
+			
+		</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="package/jquery/jquery-2.1.0.js"></script>
+	</head>
+	<body>
+		<p>用户名：<input type="text" id="username"/></p>
+		<p>密码：<input type="text" id="password"/></p>
+		<p>性别：<input type="radio" name="sex" class="sex" value="0" checked/>男<input type="radio" name="sex" class="sex" value="1"/>女</p>
+		<p>手机：<input type="tel" id="tel"/></p>
+		<p id="like">爱好：
+			<input type="checkbox" value="唱歌" />唱歌
+			<input type="checkbox" value="游泳" />游泳
+			<input type="checkbox" value="攀岩" />攀岩
+			<input type="checkbox" value="蹦极" />蹦极
+		</p>
+		<button id="register">注册</button>
+	</body>
+	<script type="text/javascript">
+		
+		$("#register").click(function(){
+			checkarr = "";
+			$('input[type="checkbox"]:checked').each(function(){
+				checkarr+=$(this).val();
+			});
+			var oSex = $('input[type="radio"]:checked').val();
+//			alert(checkarr)
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8888/user/register",
+				async:true,
+				data:{
+					username:$("#username").val(),
+					password:$("#password").val(),
+					sex:oSex,
+					tel:$("#tel").val(),
+					hobby:checkarr
+				},
+				success:function(data){
+//					debugger;
+					if(data.flag == 1){
+						alert("注册成功！")
+					}else if(data.flag==2){
+						alert("用户名被占用")
+					}else{
+						alert("注册失败！")
+					}
+					
+				},
+				error:function(){
+					alert("失败！")
+				}
+			});
+		})
+//		function arrlike(){
+//			$('input[type="checkbox"]:checked').each(function(){
+//				checkarr.push($(this).val())
+//			});
+//			return checkarr;
+//		}
+	</script>
+</html>

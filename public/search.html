@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="javascripts/jquery/jquery.js"></script>
+	</head>
+	<body>
+		<input type="search" name="search" id="search" value="" /><button>搜索</button>
+		<div>
+			<img src="" alt="">
+		</div>
+	</body>
+	<script type="text/javascript">
+		$('button').click(function(){
+			$.ajax({
+				type:"get",
+				url:"http://localhost:8888/user/search",
+				async:true,
+				data:{search:$('#search').val()},
+				success:function(e){
+					console.log(e)
+				},
+				error:function(){
+					
+				}
+			});
+		})
+	</script>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="package/jquery/jquery-2.1.0.js"></script>
+		<script src="package/BootStrap/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="package/BootStrap/css/bootstrap.min.css"/>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.f_main{
+				width: 100vw;
+				height: 100vh;
+				background: url(img/34c64f3b81d159e76feb116682fd52.png) no-repeat;
+				background-size: 100% 100%;
+				position: fixed;
+				top: 0;
+				left: 0;
+			}
+			.logo_name{
+				position: absolute;
+				left: 360px;
+				top: 138px;
+				font-size: 36px;
+				color: #EB6100;
+				font-weight: 600;
+				text-shadow: 2px 2px 4px #ffffff;
+			}
+			.login{
+				width: 300px;
+				height: 400px;
+				position: absolute;
+				top: 140px;
+				right: 260px;
+				background: #E6F5F9;
+				border-radius: 6px;
+			}
+			#legend{
+				width: 100%;
+				height: 56px;
+			}
+			#legend legend{
+				border-bottom: 1px solid #5A92B0;
+				line-height: 56px;
+				text-align: center;
+				font-size: 16px;
+				font-weight: 600;
+				color: #006994;
+			}
+			.controls{
+				width: 90%;
+				height: 36px;
+				margin: 15px auto 0;
+				position: relative;
+			}
+			.controls input{
+				width: 100%;
+				height: 100%;
+				border-radius: 4px;
+				border: 1px solid #5A92B0;
+				background: #FFFFFF;
+				text-indent: 12px;
+			}
+			.controls button{
+				width: 100%;
+				height: 46px;
+				border-radius: 4px;
+				border: 1px solid #5A92B0;
+				background: #28D1FB;
+				color: #ffffff;
+				font-size: 22px;
+				
+				/*margin-top: 10px;*/
+				
+			}
+			.controls b{
+				color:crimson;
+				font-size: 12px;
+				position: absolute;
+				top: 10px;
+				right: 5px;
+				
+			}
+			.issex{
+				width: 90%;
+				height: 16px;
+				margin: 20px auto 0;
+				color: #A9A9A9;
+			}
+			.issex span{
+				margin-right: 15px;
+				color: #6A6A6A;
+			}
+			.issex input{
+				margin: 0 10px;
+				color: #A9A9A9;
+			}
+			.islike{
+				color: #6A6A6A;
+				width: 90%;
+				height: 48px;
+				margin: 15px auto 0;
+			}
+			.islike span{
+				float: left;
+				height: 48px;
+				width: 50px;
+			}
+			.islike input{
+				margin: 0 10px;
+				color: #A9A9A9;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="f_main">
+			<p class="logo_name">CRM系统管理</p>
+			<div class="login">
+			  <form class="form-horizontal">
+			    <fieldset>
+			      <div id="legend" class="">
+			        <legend class="">注册账号</legend>
+			      </div>
+			    
+			
+			    <div class="control-group">
+			
+			          <!-- Text input-->
+			          <div class="controls">
+			            <input type="text" id="username" placeholder="注册用户名" class="input-xlarge">
+			            <b id="name"></b>
+			          </div>
+			    </div>
+			    <div class="control-group">
+			
+			          <!-- Text input-->
+			          <div class="controls">
+			            <input type="password" id="password" placeholder="请输入密码" class="input-xlarge">
+			            <b id="pasd"></b>
+			          </div>
+			    </div>
+			
+			    <div class="control-group">
+			
+		          <!-- Search input-->
+		          <div class="controls">
+		            <input type="tel" id="tel" placeholder="请输入手机号码" class="input-xlarge search-query">
+		            <b id="tel"></b>
+		          </div>
+		
+		        </div>
+		        <p class="issex"><span>性别：</span>
+		        	<input type="radio" name="sex" class="sex" value="0" checked/>男
+		        	<input type="radio" name="sex" class="sex" value="1"/>女
+		        </p>
+		        <p class="islike"><span>爱好：</span>
+					<input type="checkbox" value="唱歌" />唱歌
+					<input type="checkbox" value="游泳" />游泳
+					<input type="checkbox" value="攀岩" />攀岩
+					<input type="checkbox" value="蹦极" />蹦极
+				</p>
+				
+			    <div class="control-group">
+			          <!-- Button -->
+			          <div class="controls btn_login">
+			            <button type="button" class="btn btn-success" id="register">注册</button>
+			          </div>
+			    </div>
+			    
+			
+			    </fieldset>
+			  </form>
+
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		var phone=/^((\+)?86|((\+)?86)?)0?1[34578]\d{9}$/;//手机验证
+		$("#tel").blur(function(){
+//			alert(555)
+			if($(this).val().match(phone)){
+				user_phone=true;
+				$(this).next().html('');
+//				alert(5544)
+			}else{
+				$(this).next().html('*请输入正确格式');
+//				alert(6655)
+			}
+		})
+		var psd=/^[a-zA-Z]\w{5,17}$/;//密码验证
+		$("#password").blur(function(){
+			if($(this).val().match(psd)){
+				pass_word=true;
+				$(this).next().html('');
+			}else{
+				$(this).next().html('*请输入正确的格式');
+			}
+		});
+		var name=/^[a-zA-Z]\w{5,17}$/;//用户名
+		$("#username").blur(function(){
+			if($(this).val().match(psd)){
+				pass_word=true;
+				$(this).next().html('');
+			}else{
+				$(this).next().html('*请输入正确的格式');
+			}
+		})
+		
+		
+		$("#register").click(function(){
+			checkarr = "";
+			$('input[type="checkbox"]:checked').each(function(){
+				checkarr+=$(this).val();
+			});
+			var oSex = $('input[type="radio"]:checked').val();
+//			alert(checkarr)
+			if ($('#tel').html()==''&&$('#pasd').html()==''&&$('#name').html()=='') {
+				$.ajax({
+					type:"post",
+					url:"http://localhost:8888/user/register",
+					async:true,
+					data:{
+						username:$("#username").val(),
+						password:$("#password").val(),
+						sex:oSex,
+						tel:$("#tel").val(),
+						hobby:checkarr
+					},
+					success:function(data){
+						console.log(data.insertId)
+	//					debugger;
+						if(data.flag == 1){
+							alert("注册成功！")
+							location.href = 'login.html'
+						}else if(data.flag==2){
+							alert("用户名被占用")
+						}else{
+							alert("网络异常！")
+						}
+						
+					},
+					error:function(){
+						alert("失败！")
+					}
+				});
+			}else{
+				alert("注册失败")
+			}
+			
+		})
+//		function arrlike(){
+//			$('input[type="checkbox"]:checked').each(function(){
+//				checkarr.push($(this).val())
+//			});
+//			return checkarr;
+//		}
+	</script>
+</html>

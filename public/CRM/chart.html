@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="package/jquery/jquery-2.1.0.js"></script>
+		<script src="package/echarts/echarts.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/list.css"/>
+		<style type="text/css">
+			#icon{
+				width: 400px;
+				height: 300px;
+				margin-left: 160px;
+				margin-top: 40px;
+				float: left;
+			}
+			#iconB{
+				width: 500px;
+				height: 300px;
+				margin-left: 100px;
+				margin-top: 40px;
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="logo">
+				<img src="img/logo.png"/>
+			</div>
+		</header>
+		<nav>
+			<a href="list.html"><img src="img/nav1.png"/></a>
+			<a><img src="img/nav3.png"/></a>
+			<a><img src="img/nav4.png"/></a>
+			<a><img src="img/nav5.png"/></a>
+			<a><img src="img/nav6.png"/></a>
+			<a href="addition.html"><img src="img/nav7.png"/></a>
+			<a href="chart.html"><img src="img/nav8.png"/></a>
+			<a href="detail.html"><img src="img/nav9.png"/></a>
+			<a><img src="img/nav10.png"/></a>
+		</nav>
+		<div class="main">
+			
+			<div id="icon"></div>
+			<div id="iconB"></div>
+			<div id="chartZ"></div>
+				
+			
+		</div>
+		<footer>
+			<p>源自北美的技术，最优秀的师资，最真实的企业环境，最实用的实战项目</p>
+			<p>版权所有@加拿大达内IT培训集团公司</p>
+		</footer>
+		<script>
+		var myIcon = echarts.init(document.getElementById('icon'));
+			$.ajax({
+				type:'get',
+				url:"http://localhost:8888/item/list",
+				async:true,
+				success:function(e){
+//					debugger;
+					var aName = [];
+					var age = [];
+					for (var i=0;i<e.length;i++) {
+						aName.push(e[i].name)
+						age.push(e[i].age)
+					}
+//					alert(aName)
+					var option = {
+						color:['#FD7774'],
+			            title: {
+			                text: 'CRM 客户年龄统计图'
+			            },
+			            tooltip: {},
+			         	
+				        legend: {
+			                data:['年龄'],
+			                right: 'right'
+			            },
+			            xAxis: {
+			                data: aName
+			            },
+			            yAxis: {},
+			            series: [
+				            {
+				                name: '年龄',
+				                type: 'bar',	//柱状图
+				                data: age
+				            }
+			            ]
+			        };
+			        myIcon.setOption(option)
+				},
+				error:function(){
+					
+				}
+			})
+		var myChart = echarts.init(document.getElementById('iconB'));
+//		console.log(#('#div')[0])
+			$.ajax({
+				type:'get',
+				url:"http://localhost:8888/item/list",
+				async:true,
+				success:function(e){
+//					debugger;
+					
+					var arr1 = []
+					var arr2 = []
+					var arr3 = []
+					var arr4 = []
+					var ratio = ['20岁以下','20~30岁','30~40岁','40岁以上']
+					for (var i=0;i<e.length;i++) {
+						
+						if(e[i].age<20){
+							arr1.push(e[i].age)
+						}else if(30>e[i].age&&e[i].age>=20){
+							arr2.push(e[i].age)
+						}else if(40>e[i].age&&e[i].age>=30){
+							arr3.push(e[i].age)
+						}else{
+							arr4.push(e[i].age)
+						}
+					}
+//					alert(aName)
+					var option = {
+						color:['#61a0a8', '#d48265', '#91c7ae','#749f83'],
+//						roseType:'angie',//南丁格尔图
+					    title : {
+					        text: 'CRM 客户年龄比例图',
+					        x:'center',
+					        subText:'百分比',
+					        textstyle:{
+					        	color:'red'
+					        }
+					    },
+					    tooltip : {//自定义工具
+					        trigger: 'item',
+					        formatter: "{a} <br/>{b} : {c} ({d}%)"
+					    },
+					    legend: {
+					        orient: 'vertical',	//排列方向       horizontal  横向	vertical 纵向
+					        left: 'left',
+					        data: ['20岁以下','20~30岁','30~40岁','40岁以上']
+					    },
+					    series : [
+					        {
+					            name: '年龄',
+					            type: 'pie',	//饼状图
+					            radius : '55%',
+					            center: ['50%', '50%'],
+					            data:[
+					                {value:arr1.length, name:'20岁以下'},
+					                {value:arr2.length, name:'20~30岁'},
+					                {value:arr3.length, name:'30~40岁'},
+					                {value:arr4.length, name:'40岁以上'}
+					            ],
+					            itemStyle: {
+					                emphasis: {
+					                    shadowBlur: 1000,
+					                    shadowOffsetX: 0,
+					                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+					                },
+					                normal:{
+//					                	color: function (value){
+//					                		
+//					                		return "#"+("00000"+((Math.random()*16777215+0.5)>>0).toString(16)).slice(-6); 
+//					                	}
+					                }
+					            }
+					        }
+					    ]
+					};
+					 myChart.setOption(option);
+				},
+				error:function(){
+					
+				}
+			})
+		</script>
+	</body>
+</html>

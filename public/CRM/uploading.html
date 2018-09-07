@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="package/jquery/jquery-2.1.4.min.js"></script>
+	</head>
+	<body>
+		<div id="main">
+			<p>用户名： <input type="text" name="uname" id="uname" value="" /></p>
+			<p>密码： <input type="password" name="pwd" id="pwd" value="" /></p>
+			<p><input type="file" onchange="setFiles(this)" id="uploadfild" />
+			<button id="submit">提交</button></p>
+		</div>
+	</body>
+	<script type="text/javascript">
+//	var formData = new FormData($( "#uploadfild" )[0]); 
+		var files;
+		var setFiles = function(element){
+			console.log(element.files)  //获取到选取的图片
+			files = element.files[0];
+		}
+
+		
+		
+		$('#submit').click(function(){
+			var fd = new FormData();
+			fd.append('uploadfild',files)
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8888/upload/up",
+				contentType:false,
+				processData:false,
+				data:fd,
+//					username:$('#uname').val(),
+//					password:$('#pwd').val(),
+//					uploadfild:$('#uploading').val()
+				
+				async:true,
+				success:function(e){
+					console.log(e)
+				},
+				error:function(){
+					
+				}
+			});
+		})
+	</script>
+</html>

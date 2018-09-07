@@ -1,0 +1,129 @@
+@import reset;
+
+header{
+    width: 100%;
+    height: 80px;
+    background: #0FA7D8;
+    .logo{
+        width: 100%;
+        height: 80px;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+nav{
+    width: 100%;
+    height: 120px;
+    background: #0488B9;
+    padding-left: 40px;
+    padding-top: 20px;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    a{
+       -webkit-box-flex: 1; 
+        display: block;
+//      &:hover{
+//          width: ;
+//      }
+    }
+}
+.main{
+    width: 100%;
+    height: calc(~'100vh - 260px');
+    overflow: auto;
+    border-width: 10px 30px;
+    border-color: #0C9ECF;
+    border-style: solid;
+    position: relative;
+    .increase{
+        width: 96%;
+        height: 24px;
+        margin: 15px auto 0;
+        
+        #findText{
+            width: 240px;
+            height: 24px;
+            float: left;
+        }
+        #find{
+            width: 52px;
+            height: 30px;
+            float: left;
+            margin-left: 20px;
+        }
+        #add{
+            width: 52px;
+            height: 30px;
+            float: right;
+        }
+        
+    }
+    #main_list{
+        width: 96%;
+        overflow: hidden;
+        margin: 15px auto;
+        border: 1px solid #C8CACB;
+        max-height: 320px;
+        >li:nth-child(1){
+                background: #FBEECE;
+            }
+        li{
+            width: 100%;
+            height: 32px;
+            border-bottom: 1px solid #C8CACB;
+            line-height: 32px;
+            
+            span{
+                float: left;
+                width: 16.6%;
+                text-align: center;
+                border-right: 1px solid #C8CACB;
+            }
+            button{
+                margin: 0 10px 0 40px;
+            }
+        }
+    }
+    #pagecount{
+        width: 360px;
+        height: 32px;
+        margin: 0 auto;
+        position: absolute;
+        bottom: 10px;
+        left: calc(~"50% - 150px");
+        font-size: 14px;
+        
+        span{
+            float: left;
+            width: 56px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: #2A3234;
+            &:hover{
+                border: 1px solid #B9D8DE;
+                cursor: pointer;
+            }
+            a{
+                color: #202428;
+            }
+        }
+        
+        
+    }
+    
+}
+footer{
+    width: 100%;
+    height: 60px;
+    background: #0C9ECF;
+    color: #F0F0F2;
+    p{
+        text-align: center;
+        font-size: 12px;
+        line-height:26px;
+        
+    }
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="package/jquery/jquery-2.1.0.js"></script>
+		<script src="package/echarts/echarts.min.js"></script>
+	</head>
+	<body>
+		<div id="main">
+			
+		</div>
+		<div id="chart" style="width: 800px;height: 600px;margin-top: 50px;">
+			
+		</div>
+		<script type="text/javascript">
+				$.ajax({
+					type:'get',
+					url:"http://localhost:8999/categ/list",
+					async:true,
+					success:function(data){
+						
+						for (var i=0;i<data.spending.length;i++) {
+							console.log(data)
+							var arrli = document.createElement('li');
+							arrli.innerHTML='<span>月份：'+data.spending[i].time+'</span>'+
+											'<span>类别：'+data.spending[i].category+'</span>'+
+											'<span>消费金额：'+data.spending[i].count+'</span>';
+											
+											
+							arrli.className = 'arrli';
+							main.appendChild(arrli);
+						};
+						
+						
+					},
+					error:function(){
+						
+					}
+				});
+				var myChart = echarts.init(document.getElementById('chart'));
+				$.ajax({
+					type:'get',
+					url:"http://localhost:8999/categ/list",
+					async:true,
+					success:function(e){
+	//					debugger;
+						
+						var arr1 = 0
+						var arr2 = 0
+						var arr3 = 0
+						
+						for (var i=0;i<e.spending.length;i++) {
+							
+							if(e.spending[i].category == 'shoping'){
+								arr1+=e.spending[i].count
+							}else if(e.spending[i].category == 'cart'){
+								arr2+=e.spending[i].count
+							}else if(e.spending[i].category == 'traffic'){
+								arr3+=e.spending[i].count
+							}
+						}
+						console.log(arr3)
+						var option = {
+							color:['#61a0a8', '#d48265', '#91c7ae','#749f83'],
+	//						roseType:'angie',//南丁格尔图
+						    title : {
+						        text: '消费图',
+						        x:'center',
+						        subText:'百分比',
+						        textstyle:{
+						        	color:'red'
+						        }
+						    },
+						    tooltip : {//自定义工具
+						        trigger: 'item',
+						        formatter: "{a} <br/>{b} : {c} ({d}%)"
+						    },
+						    legend: {
+						        orient: 'vertical',	//排列方向       horizontal  横向	vertical 纵向
+						        left: 'left',
+						        data: ['shoping','cart','traffic']
+						    },
+						    series : [
+						        {
+						            name: '类别',
+						            type: 'pie',	//饼状图
+						            radius : '55%',
+						            center: ['50%', '50%'],
+						            data:[
+						                {value:arr1, name:'shoping'},
+						                {value:arr2, name:'cart'},
+						                {value:arr3, name:'traffic'}
+						                
+						            ]
+						        }
+						    ]
+						};
+						 myChart.setOption(option);
+					},
+					error:function(){
+						
+					}
+				})
+		</script>
+	</body>
+</html>

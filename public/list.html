@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="javascripts/jquery/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="main">
+			
+		</div>
+		<div id="pagecount">
+			<span id="lastpage">
+				上一页
+			</span>
+			<div id="pages">
+				
+			</div>
+			
+			<span id="nextpage">
+				下一页
+			</span>
+			<ul id="biuuu_city_list"></ul>
+
+			<div id="biuuu_city"></div>
+		</div>
+		<script type="text/javascript">
+		
+			$.ajax({
+				type:"get",
+				url:"http://localhost:8888/item/list",
+				async:true,
+				success:function(e){
+					console.log(e)
+					for (var i=0;i<e.length;i++) {
+						var p = document.createElement('p')
+						p.innerHTML = e[i].id+'//'+e[i].pwd+'//'+e[i].uname;
+						main.appendChild(p)
+					}
+					var page_l = e.length;
+					
+					
+				},
+				error:function(){
+					alert('失败')
+				}
+			});
+		</script>
+	</body>
+</html>

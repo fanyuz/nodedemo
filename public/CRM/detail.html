@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="package/jquery/jquery-2.1.0.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/list.css"/>
+		<style type="text/css">
+			#detail{
+				width: 96%;
+				overflow: hidden;
+				margin: 15px auto;
+			}
+			#detail h3{
+				font-size: 18px;
+				margin-top: 15px;
+			}
+			#detail p{
+				line-height: 32px;
+				text-indent: 12px;
+			}
+			#detail .datas{
+				margin-top: 16px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="logo">
+				<img src="img/logo.png"/>
+			</div>
+		</header>
+		<nav>
+			<a href="list.html"><img src="img/nav1.png"/></a>
+			<a><img src="img/nav3.png"/></a>
+			<a><img src="img/nav4.png"/></a>
+			<a><img src="img/nav5.png"/></a>
+			<a><img src="img/nav6.png"/></a>
+			<a href="addition.html"><img src="img/nav7.png"/></a>
+			<a href="chart.html"><img src="img/nav8.png"/></a>
+			<a href="detail.html"><img src="img/nav9.png"/></a>
+			<a><img src="img/nav10.png"/></a>
+		</nav>
+		<div class="main">
+			
+			<div id="detail">
+				<h3>【  用户详情  】</h3>
+			</div>
+			
+			
+		</div>
+		<footer>
+			<p>源自北美的技术，最优秀的师资，最真实的企业环境，最实用的实战项目</p>
+			<p>版权所有@加拿大达内IT培训集团公司</p>
+		</footer>
+		<script>
+		
+			$.ajax({
+				type:'get',
+				url:"http://localhost:8888/item/detail",
+				async:true,
+				data:{
+					id:localStorage.id
+				},
+				success:function(data){
+//					debugger;
+					
+						console.log(data)
+						var odetail = document.createElement('div');
+						odetail.innerHTML = '<p>名字：'+data.uname+'</p>'+
+											'<p>年龄：'+data.age+'</p>'+
+											'<p>联系方式：'+data.tel+'</p>'+
+											'<p>公司：'+data.company+'</p>'+
+											'<p>职务：'+data.jibie+'</p>';
+						odetail.className = 'datas'
+						detail.appendChild(odetail)
+					
+					
+					
+				},
+				error:function(){
+					
+				}
+			});
+		</script>
+	</body>
+</html>

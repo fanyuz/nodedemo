@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="package/jquery/jquery-2.1.0.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/list.css"/>
+		<style type="text/css">
+			.adds{
+				width: 96%;
+				overflow: hidden;
+				margin: 15px auto;
+				
+			}
+			.adds h4{
+				font-size: 24px;
+				text-indent: 12px;
+				margin-bottom: 4px;
+				text-align: center;
+			}
+			.leftbar{
+				width: 36%;
+				overflow: hidden;
+				margin: 0 auto;
+			}
+			.leftbar p{
+				height: 32px;
+				width: 100%;
+				margin: 14px 0;
+			}
+			.leftbar p span{
+				width: 60px;
+				height: 32px;
+				float: left;
+				font-size: 16px;
+				text-align: center;
+				line-height: 32px;
+				margin-right: 16px;
+			}
+			.leftbar p input{
+				width: 320px;
+				height: 24px;
+			}
+			#submit{
+				display: block;
+				width: 60px;
+				height: 32px;
+				background: #34B1DF;
+				color: #FFF0F4;
+				border: 1px solid #30A6D6;
+				border-radius: 6px;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="logo">
+				<img src="img/logo.png"/>
+			</div>
+		</header>
+		<nav>
+			<a href="list.html"><img src="img/nav1.png"/></a>
+			<a><img src="img/nav3.png"/></a>
+			<a><img src="img/nav4.png"/></a>
+			<a><img src="img/nav5.png"/></a>
+			<a><img src="img/nav6.png"/></a>
+			<a href="addition.html"><img src="img/nav7.png"/></a>
+			<a href="chart.html"><img src="img/nav8.png"/></a>
+			<a href="detail.html"><img src="img/nav9.png"/></a>
+			<a><img src="img/nav10.png"/></a>
+		</nav>
+		<div class="main">
+			<div class="adds">
+				<h4>【  新增用户  】</h4>
+				<div class="leftbar">
+					<p><span>I  D:</span><input type="text" id="id" /></p>
+					<p><span>名字:</span><input type="text" id="uname" /></p>
+					<p><span>年龄:</span><input type="text" id="age" /></p>
+					<p><span>电话:</span><input type="tel" id="tel" /></p>
+					<p><span>公司:</span><input type="text" id="company" /></p>
+					<p><span>职位:</span><input type="text" id="jibie" /></p>
+				</div>
+				<button type="button" id="submit">提交</button>
+			</div>
+			
+			
+		</div>
+		<footer>
+			<p>源自北美的技术，最优秀的师资，最真实的企业环境，最实用的实战项目</p>
+			<p>版权所有@加拿大达内IT培训集团公司</p>
+		</footer>
+		<script>
+		$('#submit').click(function(){
+			
+			$.ajax({
+				
+				url:"http://localhost:8888/item/add",
+				type:'get',
+				async:true,
+				data:{
+					id:$('#id').val(),
+					uname:$('#uname').val(),
+					age:$('#age').val(),
+					tel:$('#tel').val(),
+					company:$('#company').val(),
+					jibie:$('#jibie').val()
+				},
+				success:function(data){
+					if (data.flag == 1) {
+						alert('添加成功')
+					} else if(data.flag == 2){
+						alert('用户ID已被注册')
+					}else if(data.flag == 3){
+						alert('未添加成功')
+					}
+				},
+				error:function(){
+					
+				}
+			});
+		})
+			
+		</script>
+	</body>
+</html>
